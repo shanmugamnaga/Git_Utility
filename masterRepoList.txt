@@ -1,5 +1,3 @@
-https://github.com/shanmugamnaga/DevOps
-https://github.com/shanmugamnaga/SpringBootK8sDemoUsingYAML
 https://github.com/shanmugamnaga/docs
 https://github.com/shanmugamnaga/gh-ost
 https://github.com/shanmugamnaga/dmca
