@@ -56,25 +56,25 @@ for repo_url in $repos; do
     done
 
     # Print branch stats
-    echo "📌 Total branches in $repo_name: $total_branches"
-    echo "🗓️  Total stale branches (older than $TIME_WINDOW days): ${#stale_branches[@]}"
+    echo "Total branches in $repo_name: $total_branches"
+    echo "Total stale branches (older than $TIME_WINDOW days): ${#stale_branches[@]}"
 
     # If all branches are stale
     if [ ${#stale_branches[@]} -eq "$total_branches" ]; then
-        echo -e "🚨 All branches are stale in $repo_name. ${RED}Consider deleting the entire repository!${NC}"
+        echo -e "All branches are stale in $repo_name. ${RED}Consider deleting the entire repository!${NC}"
         echo "								"
 
         echo "*************************************************************************************************************"
     else
         # Proceed with stale branch deletion
         if [ ${#stale_branches[@]} -eq 0 ]; then
-            echo "✅ No stale branches found in $repo_name."
+            echo "No stale branches found in $repo_name."
         else
-            echo "🚨 Stale branches detected in $repo_name: ${stale_branches[*]}"
+            echo "Stale branches detected in $repo_name: ${stale_branches[*]}"
             echo "								"
             echo "--- Action ---"
             echo "								"
-            echo "👉 Select branches to delete (comma-separated, or type 'all' to delete all stale branches):"
+            echo "Select branches to delete (comma-separated, or type 'all' to delete all stale branches):"
             read -p "> " selected_branches
 
             if [[ "$selected_branches" == "all" ]]; then
@@ -88,10 +88,10 @@ for repo_url in $repos; do
                 branch=$(echo $branch | xargs)
                 if [[ " ${stale_branches[@]} " =~ " $branch " ]]; then
                     git push origin --delete "$branch"
-                    echo "✅ Deleted branch: $branch"
+                    echo "Deleted branch: $branch"
                     deleted_count=$((deleted_count + 1))
                 else
-                    echo "⚠️ Branch $branch is not stale or doesn’t exist!"
+                    echo "Branch $branch is not stale or doesn’t exist!"
                     echo "                                                 "
                 fi
             done
@@ -99,10 +99,10 @@ for repo_url in $repos; do
             # Executive summary
             echo "--- Executive Summary ---"
             echo "								"
-            echo "📍 Repository: $repo_name"
-            echo "🔢 Total branches: $total_branches"
-            echo "🗑️ Stale branches detected: ${#stale_branches[@]}"
-            echo "✅ Branches deleted: $deleted_count"
+            echo "Repository: $repo_name"
+            echo "Total branches: $total_branches"
+            echo "Stale branches detected: ${#stale_branches[@]}"
+            echo "Branches deleted: $deleted_count"
             echo "  " 
             echo "*************************************************************************************************************"
         fi
